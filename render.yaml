@@ -1,0 +1,49 @@
+# render.yaml — Render Blueprint for one-click deployment
+# Deploy both backend and frontend from this single file
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ── Backend (Web Service) ─────────────────────────────────────────────────
+  - type: web
+    name: chatapp-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false          # Set manually in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Render auto-generates a secure random value
+      - key: API_SECRET_TOKEN
+        generateValue: true
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: chatapp-frontend
+          property: host
+    healthCheckPath: /health
+    autoDeploy: true
+
+  # ── Frontend (Static Site) ────────────────────────────────────────────────
+  - type: web
+    name: chatapp-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: chatapp-backend
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html   # SPA fallback
+    autoDeploy: true
