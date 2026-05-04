@@ -1,0 +1,120 @@
+/* ─── Global Reset & Variables ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Dark theme (default) */
+  --bg-primary:    #0d0f14;
+  --bg-secondary:  #13161e;
+  --bg-tertiary:   #1a1e2a;
+  --bg-hover:      #1e2333;
+  --bg-input:      #161922;
+
+  --surface-1:     #1a1e2a;
+  --surface-2:     #1e2333;
+  --surface-3:     #242840;
+
+  --accent:        #5b8af7;
+  --accent-dim:    rgba(91,138,247,0.15);
+  --accent-hover:  #7aa0ff;
+
+  --online:        #3dd68c;
+  --away:          #f5a623;
+  --offline:       #555870;
+
+  --text-primary:  #e8eaf2;
+  --text-secondary:#8b90a8;
+  --text-muted:    #555870;
+
+  --border:        rgba(255,255,255,0.06);
+  --border-accent: rgba(91,138,247,0.3);
+
+  --msg-out-bg:    #2a3a6e;
+  --msg-in-bg:     #1e2333;
+
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md:     0 4px 20px rgba(0,0,0,0.4);
+  --shadow-lg:     0 8px 40px rgba(0,0,0,0.5);
+
+  --radius-sm:     8px;
+  --radius-md:     14px;
+  --radius-lg:     20px;
+  --radius-xl:     28px;
+
+  --font-display:  'Syne', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+
+  --sidebar-w:     300px;
+  --right-w:       260px;
+
+  --transition:    all 0.2s ease;
+}
+
+/* Light theme */
+.light {
+  --bg-primary:    #f0f2f8;
+  --bg-secondary:  #ffffff;
+  --bg-tertiary:   #e8ebf5;
+  --bg-hover:      #dde1f0;
+  --bg-input:      #f5f6fa;
+
+  --surface-1:     #ffffff;
+  --surface-2:     #f0f2f8;
+  --surface-3:     #e4e7f2;
+
+  --accent:        #3b6ff5;
+  --accent-dim:    rgba(59,111,245,0.1);
+  --accent-hover:  #2558e0;
+
+  --text-primary:  #0d0f14;
+  --text-secondary:#4a4f6a;
+  --text-muted:    #8b90a8;
+
+  --border:        rgba(0,0,0,0.08);
+  --border-accent: rgba(59,111,245,0.3);
+
+  --msg-out-bg:    #3b6ff5;
+  --msg-in-bg:     #e8ebf5;
+
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md:     0 4px 20px rgba(0,0,0,0.12);
+  --shadow-lg:     0 8px 40px rgba(0,0,0,0.15);
+}
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { height: 100%; }
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ─── Animations ────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+.fade-in { animation: fadeIn 0.3s ease forwards; }
